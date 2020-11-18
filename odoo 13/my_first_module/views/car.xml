@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Form View Car -->
+    <record id="car_form" model="ir.ui.view">
+        <field name="name">Cars</field>
+        <field name="model">car.car</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <header>
+                        <field name="status" widget="statusbar"/>
+                        <button name="set_car_to_used" string="Set Car Used" type="object" class="oe_highlight"
+                                attrs="{'invisible':[('status','!=','new')]}"/>
+                        <button name="set_car_to_sold" string="Set Car Sold" type="object" class="oe_highlight"
+                                attrs="{'invisible':[('status','!=','used')]}"/>
+                    </header>
+                    <widget name="web_ribbon" text="New" bg_color="bg-danger"
+                            attrs="{'invisible':[('status','!=','new')]}"/>
+                    <widget name="web_ribbon" text="Sold" bg_color="bg-success"
+                            attrs="{'invisible':[('status','!=','sold')]}"/>
+                    <group>
+                        <group>
+                            <field name="car_sequence" readonly="1"/>
+                            <field name="name" required="1"/>
+                            <field name="horse_power"
+                                   attrs="{'readonly':[('door_number','=',4)] , 'required':[('name','=','abc')]}"
+                            />
+                            <field name="door_number"/>
+                            <field name="driver_id"/>
+                            <field name="feature_ids" widget="many2many_tags"/>
+                            <field name="total_speed"/>
+                            <!-- <field name="random_message"/>-->
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!-- Tree View Car -->
+    <record id="car_tree" model="ir.ui.view">
+        <field name="name">Cars</field>
+        <field name="model">car.car</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="horse_power"/>
+                <field name="door_number"/>
+                <field name="driver_id"/>
+            </tree>
+        </field>
+    </record>
+    <!-- Action For Car -->
+    <record id="car_action" model="ir.actions.act_window">
+        <field name="name">Cars</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">car.car</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!-- Menu Car -->
+    <menuitem id="car_menu" name="Cars" sequence="200" action="car_action"
+              web_icon="my_first_module,static/description/icon.png"/>
+</odoo>

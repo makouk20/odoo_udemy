@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <data>
+        <record id="sequence_car" model="ir.sequence">
+            <field name="name">Car</field>
+            <field name="code">car.sequence</field>
+            <field name="prefix">CAR</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+
+        <record model="ir.module.category" id="module_car_management">
+            <field name="name">Car Management</field>
+            <field name="sequence">6</field>
+        </record>
+
+        <!-- res groups Folder-->
+
+        <record id="group_user" model="res.groups">
+            <field name="name">User </field>
+            <field name="category_id" ref="module_car_management"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+
+        <record id="group_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="module_car_management"/>
+            <field name="implied_ids" eval="[(4, ref('my_first_module.group_user'))]"/>
+        </record>
+
+
+    </data>
+
+
+</odoo>
